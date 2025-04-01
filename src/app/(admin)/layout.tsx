@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/admin/Layout";
+import NextTopLoader from 'nextjs-toploader';
 
 const vazirmatn = Vazirmatn({
   subsets: ["arabic"],
@@ -20,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${vazirmatn.className}`}>
+      <body
+        className={`${vazirmatn.className} dark:bg-slate-700 dark:text-white`}
+      >
+        <NextTopLoader />
         <Layout>{children}</Layout>
       </body>
     </html>
