@@ -1,11 +1,19 @@
 import Link from "next/link";
+import { RefObject } from "react";
 
-export default function Sidebar({ isSidebarOpen }: { isSidebarOpen: boolean }) {
+export default function Sidebar({
+  isSidebarOpen,
+  sidebarRef,
+}: {
+  isSidebarOpen: boolean;
+  sidebarRef: RefObject<HTMLDivElement | null>;
+}) {
   return (
     <aside
-      className={`bg-white dark:bg-slate-800 dark:text-white shadow-md w-56 h-full fixed z-40 p-5 transition duration-300 ${
-        isSidebarOpen ? "translate-x-full" : "translate-x-0"
-      }`}
+      ref={sidebarRef}
+      className={`bg-white dark:bg-slate-800 dark:text-white shadow-md w-56 h-full fixed top-20 right-0 p-5 transition duration-300 ${
+        isSidebarOpen ? "translate-x-0" : "translate-x-full"
+      } lg:translate-x-0`}
     >
       <ul className="space-y-3 *:hover:bg-slate-300 dark:*:hover:text-black *:p-1 *:rounded">
         <li>

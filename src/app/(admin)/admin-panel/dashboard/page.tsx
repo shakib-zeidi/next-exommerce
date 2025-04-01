@@ -1,7 +1,13 @@
+import Container from "@/components/admin/Container";
+
 export default function AdminPanel() {
   return (
-    <>
-      <h1 className="text-2xl text-center my-10">پنل مدیریت</h1>
-    </>
+    <Container>
+      <section>
+        <div className="flex justify-between">
+          <h1 className="text-xl">داشبورد</h1>
+        </div>
+      </section>
+    </Container>
   );
 }

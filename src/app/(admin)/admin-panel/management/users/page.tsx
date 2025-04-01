@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function IndexUsers() {
   return (
     <Container>
-      <section className="m-5">
+      <section>
         <div className="flex justify-between">
           <h1 className="text-xl">لیست کاربران</h1>
 
