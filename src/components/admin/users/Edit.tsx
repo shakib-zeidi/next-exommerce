@@ -6,10 +6,11 @@ import Link from "next/link";
 import { useRouter } from "nextjs-toploader/app";
 import { useActionState, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import Input from "../Input";
+import Checkbox from "../Checkbox";
 
 export default function Edit({ id }: { id: number }) {
   const router = useRouter();
-
   const [user, setUser] = useState<ShowUserInterface>();
   const [isSuperuser, setIsSuperuser] = useState(false);
   const [isStaff, setIsStaff] = useState(false);
@@ -56,107 +57,52 @@ export default function Edit({ id }: { id: number }) {
   return (
     <form action={formAction}>
       <div className="mb-6">
-        <label
-          htmlFor="first_name"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          نام (اختیاری)
-        </label>
-
-        <input
-          type="text"
-          id="first_name"
-          name="first_name"
-          defaultValue={user?.first_name}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
-        />
+        <Input label="نام" name="first_name" defaultValue={user?.first_name} />
       </div>
 
       <div className="mb-6">
-        <label
-          htmlFor="last_name"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          نام خانوادگی (اختیاری)
-        </label>
-
-        <input
-          type="text"
-          id="last_name"
+        <Input
+          label="نام خانوادگی"
           name="last_name"
           defaultValue={user?.last_name}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
         />
       </div>
 
       <div className="mb-6">
-        <label
-          htmlFor="phone_number"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          شماره همراه (اختیاری)
-        </label>
-
-        <input
-          type="text"
-          id="phone_number"
+        <Input
+          label="شماره همراه"
           name="phone_number"
           defaultValue={user?.phone_number}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
         />
       </div>
 
       <div className="mb-6">
-        <label
-          htmlFor="username"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          نام کاربری
-        </label>
-
-        <input
-          type="text"
-          id="username"
+        <Input
+          label="نام کاربری"
           name="username"
           defaultValue={user?.username}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
+          errorText={state?.errors?.username}
         />
-        <p className="text-sm text-red-500 mt-2">{state.errors?.username}</p>
       </div>
 
       <div className="mb-6">
-        <label
-          htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          ایمیل
-        </label>
-
-        <input
-          type="email"
-          id="email"
+        <Input
+          label="ایمیل"
           name="email"
+          type="email"
           defaultValue={user?.email}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
+          errorText={state?.errors?.email}
         />
-        <p className="text-sm text-red-500 mt-2">{state?.errors?.email}</p>
       </div>
 
       <div className="mb-6">
-        <label
-          htmlFor="password"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          رمز عبور
-        </label>
-
-        <input
-          type="password"
-          id="password"
+        <Input
+          label="رمز عبور"
           name="password"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
+          type="password"
+          defaultValue={user?.password}
+          errorText={state?.errors?.password}
         />
-        <p className="text-sm text-red-500 mt-2">{state?.errors?.password}</p>
       </div>
 
       <div className="flex flex-col gap-2 mb-6">
@@ -165,41 +111,23 @@ export default function Edit({ id }: { id: number }) {
         </div>
 
         <div className="flex items-center">
-          <input
-            id="is_superuser"
-            type="checkbox"
-            value="true"
+          <Checkbox
+            label="مدیر کل"
             name="is_superuser"
+            value="true"
             checked={isSuperuser}
             onChange={(e) => setIsSuperuser(e.target.checked)}
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:outline-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
-
-          <label
-            htmlFor="is_superuser"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            مدیر کل
-          </label>
         </div>
 
         <div className="flex items-center">
-          <input
-            id="is_staff"
-            type="checkbox"
-            value="true"
+          <Checkbox
+            label="ادمین (دسترسی محدود)"
             name="is_staff"
+            value="true"
             checked={isStaff}
             onChange={(e) => setIsStaff(e.target.checked)}
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:outline-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
-
-          <label
-            htmlFor="is_staff"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            ادمین (دسترسی محدود)
-          </label>
         </div>
       </div>
 

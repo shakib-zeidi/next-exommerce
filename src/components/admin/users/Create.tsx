@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "nextjs-toploader/app";
 import { useActionState, useEffect } from "react";
 import Swal from "sweetalert2";
+import Input from "../Input";
+import Checkbox from "../Checkbox";
 
 export default function Create() {
   const router = useRouter();
@@ -32,84 +34,41 @@ export default function Create() {
   return (
     <form action={formAction}>
       <div className="mb-6">
-        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          نام (اختیاری)
-        </label>
-
-        <input
-          type="text"
-          id="first_name"
-          name="first_name"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
-        />
+        <Input label="نام (اختیاری)" name="first_name" />
       </div>
 
       <div className="mb-6">
-        <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          نام خانوادگی (اختیاری)
-        </label>
-
-        <input
-          type="text"
-          id="last_name"
-          name="last_name"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
-        />
+        <Input label="نام خانوادگی (اختیاری)" name="last_name" />
       </div>
 
       <div className="mb-6">
-        <label htmlFor="phone_number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          شماره همراه (اختیاری)
-        </label>
-
-        <input
-          type="text"
-          id="phone_number"
-          name="phone_number"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
-        />
+        <Input label="شماره همراه (اختیاری)" name="phone_number" />
       </div>
 
       <div className="mb-6">
-        <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          نام کاربری
-        </label>
-
-        <input
-          type="text"
-          id="username"
+        <Input
+          label="نام کاربری"
           name="username"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
+          errorText={state?.errors?.username}
         />
-        <p className="text-sm text-red-500 mt-2">{state.errors?.username}</p>
       </div>
 
       <div className="mb-6">
-        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          ایمیل
-        </label>
-
-        <input
-          type="email"
-          id="email"
+        <Input
+          label="ایمیل"
           name="email"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
+          errorText={state?.errors?.email}
+          type="email"
         />
-        <p className="text-sm text-red-500 mt-2">{state?.errors?.email}</p>
       </div>
 
       <div className="mb-6">
-        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          رمز عبور
-        </label>
-
-        <input
-          type="password"
-          id="password"
+        <Input
+          label="رمز عبور"
           name="password"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:outline-blue-500 dark:focus:border-blue-500"
+          errorText={state?.errors?.password}
+          type="password"
         />
-        <p className="text-sm text-red-500 mt-2">{state?.errors?.password}</p>
       </div>
 
       <div className="flex flex-col gap-2 mb-6">
@@ -118,31 +77,11 @@ export default function Create() {
         </div>
 
         <div className="flex items-center">
-          <input
-            id="is_superuser"
-            type="checkbox"
-            value="true"
-            name="is_superuser"
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:outline-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-
-          <label htmlFor="is_superuser" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-            مدیر کل
-          </label>
+          <Checkbox label="مدیر کل" name="is_superuser" value="true" />
         </div>
 
         <div className="flex items-center">
-          <input
-            id="is_staff"
-            type="checkbox"
-            value="true"
-            name="is_staff"
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:outline-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          
-          <label htmlFor="is_staff" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-            ادمین (دسترسی محدود)
-          </label>
+          <Checkbox label="ادمین (دسترسی محدود)" name="is_staff" value="true" />
         </div>
       </div>
 

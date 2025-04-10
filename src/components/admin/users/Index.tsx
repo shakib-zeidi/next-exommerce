@@ -2,7 +2,6 @@ import { index } from "@/actions/admin/users";
 import { IndexUsersInterface } from "@/contracts/admin/users";
 import Link from "next/link";
 import Delete from "./Delete";
-import { revalidatePath } from "next/cache";
 
 export default async function Index() {
   const data: IndexUsersInterface[] = await index();

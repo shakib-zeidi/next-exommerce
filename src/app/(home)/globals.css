@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Vazir";
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/vazir-font/27.0.2/Vazir-Medium.woff2");
+  font-weight: normal;
+  font-display: "swap";
+}
+
+:root {
+  --toastify-font-family: "Vazir";
+}
