@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Sidebar isSidebarOpen={isSidebarOpen} sidebarRef={sidebarRef} />
 
       <div className="flex flex-1">
-        <main className="flex-1 p-6 lg:mr-56 overflow-hidden mt-20">
+        <main className="flex-1 p-6 lg:mr-64 overflow-hidden mt-20">
           {children}
         </main>
       </div>

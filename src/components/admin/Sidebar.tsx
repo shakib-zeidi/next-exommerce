@@ -53,7 +53,7 @@ export default function Sidebar({
   return (
     <aside
       ref={sidebarRef}
-      className={`bg-white dark:bg-slate-800 dark:text-white shadow-md w-56 h-full fixed top-20 right-0 p-5 transition duration-300 z-40 ${
+      className={`bg-white dark:bg-slate-800 dark:text-white shadow-md w-64 h-full fixed top-20 right-0 p-5 transition duration-300 z-40 ${
         isSidebarOpen ? "translate-x-0" : "translate-x-full"
       } lg:translate-x-0`}
     >
