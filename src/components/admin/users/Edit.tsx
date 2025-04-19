@@ -1,6 +1,6 @@
 "use client";
 
-import { edit, show } from "@/actions/admin/users";
+import { update, show } from "@/actions/admin/users";
 import { ShowUserInterface } from "@/contracts/admin/users";
 import Link from "next/link";
 import { useRouter } from "nextjs-toploader/app";
@@ -15,15 +15,15 @@ export default function Edit({ id }: { id: number }) {
   const [isSuperuser, setIsSuperuser] = useState(false);
   const [isStaff, setIsStaff] = useState(false);
 
-  const editWithId = (
+  const updateWithId = (
     state: { success: boolean; errors: Record<string, string> },
     formData: FormData
   ) => {
     formData.append("id", id.toString());
-    return edit(state, formData);
+    return update(state, formData);
   };
 
-  const [state, formAction, pending] = useActionState(editWithId, {
+  const [state, formAction, pending] = useActionState(updateWithId, {
     success: false,
     errors: {},
     message: "",

@@ -1,11 +1,11 @@
 "use server";
 
-import { CreateUserInterface, UpdateUserInterface } from "@/contracts/admin/users";
+import { CreateTagInterface, UpdateTagInterface } from "@/contracts/admin/tags";
 
-const baseUrl = "http://localhost:8000/api";
+const baseUrl = "http://localhost:8000/api/admin";
 
 export async function index() {
-  const res = await fetch(`${baseUrl}/users`, {
+  const res = await fetch(`${baseUrl}/tags`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export async function index() {
 }
 
 export async function show(id: number) {
-  const res = await fetch(`${baseUrl}/users/${id}`, {
+  const res = await fetch(`${baseUrl}/tags/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -30,18 +30,12 @@ export async function show(id: number) {
 
 export async function create(state: { success: boolean; errors: Record<string, string> }, formData: FormData) {
   try {
-    const formValues: CreateUserInterface = {
-      first_name: formData.get("first_name"),
-      last_name: formData.get("last_name"),
-      phone_number: formData.get("phone_number"),
-      username: formData.get("username"),
-      email: formData.get("email"),
-      password: formData.get("password"),
-      is_superuser: formData.get("is_superuser") ? true : false,
-      is_staff: formData.get("is_staff") ? true : false,
+    const formValues: CreateTagInterface = {
+      name: formData.get("name"),
+      slug: formData.get("slug"),
     };
 
-    const res = await fetch(`${baseUrl}/users/`, {
+    const res = await fetch(`${baseUrl}/tags/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,12 +55,12 @@ export async function create(state: { success: boolean; errors: Record<string, s
         }
       });
 
-      return { success: false, errors, message: "خطا در ایجاد کاربر" };
+      return { success: false, errors, message: "خطا در ایجاد تگ" };
     }
 
-    return { success: true, errors: {}, message: "کاربر با موفقیت ایجاد شد" };
+    return { success: true, errors: {}, message: "تگ با موفقیت ایجاد شد" };
   } catch (error) {
-    console.error("Error creating user:", error);
+    console.error("Error creating tag:", error);
     return {
       success: false,
       errors: {},
@@ -78,26 +72,16 @@ export async function create(state: { success: boolean; errors: Record<string, s
 export async function update(state: { success: boolean; errors: Record<string, string> }, formData: FormData) {
   const id = formData.get("id");
   if (!id) {
-    return { success: false, errors: {}, message: "خطا: شناسه کاربر یافت نشد" };
+    return { success: false, errors: {}, message: "خطا: شناسه تگ یافت نشد" };
   }
 
   try {
-    const formValues: UpdateUserInterface = {
-      first_name: formData.get("first_name"),
-      last_name: formData.get("last_name"),
-      phone_number: formData.get("phone_number"),
-      username: formData.get("username"),
-      email: formData.get("email"),
-      is_superuser: formData.get("is_superuser") === "true",
-      is_staff: formData.get("is_staff") === "true",
+    const formValues: UpdateTagInterface = {
+      name: formData.get("name"),
+      slug: formData.get("slug"),
     };
 
-    const password = formData.get("password");
-    if (password) {
-      formValues.password = password;
-    }
-
-    const res = await fetch(`${baseUrl}/users/${id}/`, {
+    const res = await fetch(`${baseUrl}/tags/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -117,12 +101,12 @@ export async function update(state: { success: boolean; errors: Record<string, s
         }
       });
 
-      return { success: false, errors, message: "خطا در ویرایش کاربر" };
+      return { success: false, errors, message: "خطا در ویرایش تگ" };
     }
 
-    return { success: true, errors: {}, message: "کاربر با موفقیت ویرایش شد" };
+    return { success: true, errors: {}, message: "تگ با موفقیت ویرایش شد" };
   } catch (error) {
-    console.error("Error updating user:", error);
+    console.error("Error updating tag:", error);
     return {
       success: false,
       errors: {},
@@ -133,22 +117,22 @@ export async function update(state: { success: boolean; errors: Record<string, s
 
 export async function destroy(id: number) {
   try {
-    const res = await fetch(`${baseUrl}/users/${id}/`, {
+    const res = await fetch(`${baseUrl}/tags/${id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    const data = await res.json();
+    await res.json();
 
     if (!res.ok) {
-      return { success: false, message: "خطا در حذف کاربر" };
+      return { success: false, message: "خطا در حذف تگ" };
     }
 
-    return { success: true, errors: {}, message: "کاربر با موفقیت حذف شد" };
+    return { success: true, errors: {}, message: "تگ با موفقیت حذف شد" };
   } catch (error) {
-    console.error("Error creating user:", error);
+    console.error("Error deleting tag:", error);
     return {
       success: false,
       errors: {},

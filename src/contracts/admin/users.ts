@@ -27,7 +27,7 @@ export interface CreateUserInterface {
   is_staff: boolean;
 }
 
-export interface EditUserInterface {
+export interface UpdateUserInterface {
   first_name: FormDataEntryValue | null;
   last_name: FormDataEntryValue | null;
   phone_number: FormDataEntryValue | null;
