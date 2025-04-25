@@ -1,5 +1,6 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { Store } from "lucide-react";
+import Link from "next/link";
 
 interface DropDwonPropsInterface {
   btnName: string;
@@ -23,12 +24,12 @@ export default function DropDwon({ btnName, subMenu }: DropDwonPropsInterface) {
         {subMenu.map((item) => (
           <div className="py-1" key={item.id}>
             <MenuItem>
-              <a
+              <Link
                 href={item.link}
                 className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
               >
                 {item.name}
-              </a>
+              </Link>
             </MenuItem>
           </div>
         ))}
