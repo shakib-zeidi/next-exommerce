@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Delete from "./Delete";
-import { IndexTagsInterface } from "@/contracts/admin/tags";
-import { index } from "@/actions/admin/tags";
+import { IndexAttributesInterface } from "@/contracts/admin/attributes";
+import { index } from "@/actions/admin/attributes";
 
 export default async function Index() {
-  const tags: IndexTagsInterface[] = await index();
+  const attributes: IndexAttributesInterface[] = await index();
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-10">
@@ -20,39 +20,33 @@ export default async function Index() {
             </th>
 
             <th scope="col" className="px-6 py-3">
-              نام انگلیسی
-            </th>
-
-            <th scope="col" className="px-6 py-3">
               <span>اقدامات</span>
             </th>
           </tr>
         </thead>
         <tbody>
-          {tags.map((tag) => (
+          {attributes.map((attribute) => (
             <tr
-              key={tag?.id}
+              key={attribute?.id}
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
             >
               <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {tag?.id}
+                {attribute?.id}
               </th>
 
               <td className="px-6 py-4 font-medium text-indigo-600 dark:text-green-500 hover:underline">
-                <Link href={`/admin-panel/management/tags/show/${tag?.id}`}>{tag?.name}</Link>
+                <Link href={`/admin-panel/management/attributes/show/${attribute?.id}`}>{attribute?.name}</Link>
               </td>
-
-              <td className="px-6 py-4">{tag?.slug}</td>
 
               <td className="px-6 py-4 text-right space-x-5">
                 <Link
-                  href={`/admin-panel/management/tags/edit/${tag?.id}`}
+                  href={`/admin-panel/management/attributes/edit/${attribute?.id}`}
                   className="font-medium text-indigo-600 dark:text-green-500 hover:underline"
                 >
                   ویرایش
                 </Link>
 
-                <Delete id={tag?.id} />
+                <Delete id={attribute?.id} />
               </td>
             </tr>
           ))}

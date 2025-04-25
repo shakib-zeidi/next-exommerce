@@ -4,7 +4,7 @@ import Link from "next/link";
 import Delete from "./Delete";
 
 export default async function Index() {
-  const data: IndexUsersInterface[] = await index();
+  const users: IndexUsersInterface[] = await index();
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-10">
@@ -33,7 +33,7 @@ export default async function Index() {
           </tr>
         </thead>
         <tbody>
-          {data.map((user) => (
+          {users.map((user) => (
             <tr
               key={user?.id}
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"

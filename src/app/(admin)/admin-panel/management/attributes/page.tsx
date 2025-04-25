@@ -1,12 +1,12 @@
-import Index from "@/components/admin/brands/Index";
+import Index from "@/components/admin/attributes/Index";
 import { Search } from "lucide-react";
 import Link from "next/link";
 
-export default async function IndexBrandsPage() {
+export default async function IndexAttributesPage() {
   return (
     <section>
       <div className="flex justify-between items-center">
-        <h1 className="text-xl">لیست برند ها</h1>
+        <h1 className="text-xl">لیست ویژگی ها</h1>
 
         <div className="flex justify-center items-center w-64 relative max-md:hidden">
           <input
@@ -23,14 +23,14 @@ export default async function IndexBrandsPage() {
         </div>
 
         <Link
-          href="/admin-panel/management/brands/create"
+          href="/admin-panel/management/attributes/create"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
         >
-          ایجاد برند
+          ایجاد ویژگی
         </Link>
       </div>
 
-      {/* Brands List Table */}
+      {/* Attributes List Table */}
       <Index />
     </section>
   );

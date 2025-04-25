@@ -1,12 +1,12 @@
 "use server";
 
+import { UpdateAttributeInterface } from "@/contracts/admin/attributes";
 import { CreateBrandInterface } from "@/contracts/admin/brands";
-import { UpdateTagInterface } from "@/contracts/admin/tags";
 
 const baseUrl = "http://localhost:8000/api/admin";
 
 export async function index() {
-  const res = await fetch(`${baseUrl}/brands`, {
+  const res = await fetch(`${baseUrl}/attributes`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export async function index() {
 }
 
 export async function show(id: number) {
-  const res = await fetch(`${baseUrl}/brands/${id}`, {
+  const res = await fetch(`${baseUrl}/attributes/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export async function create(state: { success: boolean; errors: Record<string, s
       slug: formData.get("slug"),
     };
 
-    const res = await fetch(`${baseUrl}/brands/`, {
+    const res = await fetch(`${baseUrl}/attributes/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,12 +56,12 @@ export async function create(state: { success: boolean; errors: Record<string, s
         }
       });
 
-      return { success: false, errors, message: "خطا در ایجاد برند" };
+      return { success: false, errors, message: "خطا در ایجاد ویژگی" };
     }
 
-    return { success: true, errors: {}, message: "برند با موفقیت ایجاد شد" };
+    return { success: true, errors: {}, message: "ویژگی با موفقیت ایجاد شد" };
   } catch (error) {
-    console.error("Error creating brand:", error);
+    console.error("Error creating attribute:", error);
     return {
       success: false,
       errors: {},
@@ -73,16 +73,15 @@ export async function create(state: { success: boolean; errors: Record<string, s
 export async function update(state: { success: boolean; errors: Record<string, string> }, formData: FormData) {
   const id = formData.get("id");
   if (!id) {
-    return { success: false, errors: {}, message: "خطا: شناسه برند یافت نشد" };
+    return { success: false, errors: {}, message: "خطا: شناسه ویژگی یافت نشد" };
   }
 
   try {
-    const formValues: UpdateTagInterface = {
+    const formValues: UpdateAttributeInterface = {
       name: formData.get("name"),
-      slug: formData.get("slug"),
     };
 
-    const res = await fetch(`${baseUrl}/brands/${id}/`, {
+    const res = await fetch(`${baseUrl}/attributes/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -102,12 +101,12 @@ export async function update(state: { success: boolean; errors: Record<string, s
         }
       });
 
-      return { success: false, errors, message: "خطا در ویرایش برند" };
+      return { success: false, errors, message: "خطا در ویرایش ویژگی" };
     }
 
-    return { success: true, errors: {}, message: "برند با موفقیت ویرایش شد" };
+    return { success: true, errors: {}, message: "ویژگی با موفقیت ویرایش شد" };
   } catch (error) {
-    console.error("Error updating brand:", error);
+    console.error("Error updating attribute:", error);
     return {
       success: false,
       errors: {},
@@ -118,7 +117,7 @@ export async function update(state: { success: boolean; errors: Record<string, s
 
 export async function destroy(id: number) {
   try {
-    const res = await fetch(`${baseUrl}/brands/${id}/`, {
+    const res = await fetch(`${baseUrl}/attributes/${id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -128,12 +127,12 @@ export async function destroy(id: number) {
     await res.json();
 
     if (!res.ok) {
-      return { success: false, message: "خطا در حذف برند" };
+      return { success: false, message: "خطا در حذف ویژگی" };
     }
 
-    return { success: true, errors: {}, message: "برند با موفقیت حذف شد" };
+    return { success: true, errors: {}, message: "ویژگی با موفقیت حذف شد" };
   } catch (error) {
-    console.error("Error deleting brand:", error);
+    console.error("Error deleting attribute:", error);
     return {
       success: false,
       errors: {},
