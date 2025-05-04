@@ -2,7 +2,7 @@ interface ConfigInterface {
   urls: {
     admin: string;
     home: string;
-  }
+  };
 }
 
 const config: ConfigInterface = {
@@ -11,4 +11,5 @@ const config: ConfigInterface = {
     home: "http://localhost:8000/api",
   },
 };
-export default config
+
+export default config;
