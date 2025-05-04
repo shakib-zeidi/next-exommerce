@@ -3,7 +3,7 @@
 import { CreateUserInterface, UpdateUserInterface } from "@/contracts/admin/users";
 import config from "../../../config";
 
-const baseUrl = config.urls.admin;
+const baseUrl = config.urls.home;
 
 export async function index() {
   const res = await fetch(`${baseUrl}/users`, {
