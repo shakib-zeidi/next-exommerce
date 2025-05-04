@@ -1,8 +1,9 @@
 "use server";
 
 import { CreateUserInterface, UpdateUserInterface } from "@/contracts/admin/users";
+import config from "../../../config";
 
-const baseUrl = "http://localhost:8000/api";
+const baseUrl = config.urls.admin;
 
 export async function index() {
   const res = await fetch(`${baseUrl}/users`, {

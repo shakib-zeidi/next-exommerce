@@ -1,8 +1,9 @@
 "use server";
 
 import { CreateTagInterface, UpdateTagInterface } from "@/contracts/admin/tags";
+import config from "../../../config";
 
-const baseUrl = "http://localhost:8000/api/admin";
+const baseUrl = config.urls.admin;
 
 export async function index() {
   const res = await fetch(`${baseUrl}/tags`, {

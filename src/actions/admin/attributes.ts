@@ -2,8 +2,9 @@
 
 import { UpdateAttributeInterface } from "@/contracts/admin/attributes";
 import { CreateBrandInterface } from "@/contracts/admin/brands";
+import config from "../../../config";
 
-const baseUrl = "http://localhost:8000/api/admin";
+const baseUrl = config.urls.admin;
 
 export async function index() {
   const res = await fetch(`${baseUrl}/attributes`, {
