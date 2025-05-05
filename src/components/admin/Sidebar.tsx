@@ -1,6 +1,6 @@
 "use client";
 
-import { Monitor, Users } from "lucide-react";
+import { FolderOpen, Gauge, MessageSquare, NotebookPen, StickyNote, Store, Users } from "lucide-react";
 import Link from "next/link";
 import { RefObject } from "react";
 import DropDwon from "./DropDown";
@@ -12,7 +12,7 @@ export default function Sidebar({
   isSidebarOpen: boolean;
   sidebarRef: RefObject<HTMLDivElement | null>;
 }) {
-  const submenuItems = [
+  const shopMenuItems = [
     {
       id: 1,
       name: "تگ ها",
@@ -50,6 +50,60 @@ export default function Sidebar({
     },
   ];
 
+  const postMenuItems = [
+    {
+      id: 1,
+      name: "همه نوشته ها",
+      link: "/admin-panel/management/posts",
+    },
+    {
+      id: 2,
+      name: "افزودن نوشته",
+      link: "/admin-panel/management/posts/create",
+    },
+    {
+      id: 3,
+      name: "دسته ها",
+      link: "/admin-panel/management/posts/categories",
+    },
+    {
+      id: 4,
+      name: "برچسب ها",
+      link: "/admin-panel/management/posts/tags",
+    },
+    {
+      id: 5,
+      name: "نوع محتوا",
+      link: "/admin-panel/management/posts/content-types",
+    },
+  ];
+
+  const mediaMenuItems = [
+    {
+      id: 1,
+      name: "کتابخانه",
+      link: "/admin-panel/management/library",
+    },
+    {
+      id: 2,
+      name: "افزودن پرونده رسانه ای",
+      link: "/admin-panel/management/library/create",
+    },
+  ];
+
+  const pagesMenuItems = [
+    {
+      id: 1,
+      name: "همه برگه ها",
+      link: "/admin-panel/management/pages",
+    },
+    {
+      id: 2,
+      name: "افزودن برگه جدید",
+      link: "/admin-panel/management/library/pages/create",
+    },
+  ];
+
   return (
     <aside
       ref={sidebarRef}
@@ -60,9 +114,32 @@ export default function Sidebar({
       <ul className="space-y-3 *:hover:bg-slate-300 dark:*:hover:text-black *:p-1 *:rounded *:cursor-pointer">
         <li>
           <Link href="/admin-panel/dashboard" className="flex gap-2 items-center">
-            <Monitor size={15} />
-            داشبورد
+            <Gauge size={15} />
+            پیشخوان
           </Link>
+        </li>
+
+        <li>
+          <DropDwon btnName="نوشته ها" subMenu={postMenuItems} icon={<NotebookPen size={15} />} />
+        </li>
+
+        <li>
+          <DropDwon btnName="رسانه" subMenu={mediaMenuItems} icon={<FolderOpen size={15} />} />
+        </li>
+
+        <li>
+          <DropDwon btnName="برگه ها" subMenu={pagesMenuItems} icon={<StickyNote size={15} />} />
+        </li>
+
+        <li>
+          <Link href="/admin-panel/management/comments" className="flex gap-2 items-center">
+            <MessageSquare size={15} />
+            دیدگاه ها
+          </Link>
+        </li>
+
+        <li>
+          <DropDwon btnName="فروشگاه" subMenu={shopMenuItems} icon={<Store size={15} />} />
         </li>
 
         <li>
@@ -70,10 +147,6 @@ export default function Sidebar({
             <Users size={15} />
             کاربران
           </Link>
-        </li>
-
-        <li>
-          <DropDwon btnName="فروشگاه" subMenu={submenuItems} />
         </li>
       </ul>
     </aside>

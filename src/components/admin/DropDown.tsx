@@ -4,15 +4,16 @@ import Link from "next/link";
 
 interface DropDwonPropsInterface {
   btnName: string;
+  icon: any;
   subMenu: { id: number; name: string; link: string }[];
 }
 
-export default function DropDwon({ btnName, subMenu }: DropDwonPropsInterface) {
+export default function DropDwon({ btnName, icon, subMenu }: DropDwonPropsInterface) {
   return (
     <Menu as="div" className="relative inline-block">
       <div className="*:cursor-pointer">
-        <MenuButton className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md text-white hover:text-black shadow-xs">
-          <Store aria-hidden="true" size={15} />
+        <MenuButton className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md dark:text-white hover:text-black outline-none">
+          {icon}
           {btnName}
         </MenuButton>
       </div>
