@@ -9,6 +9,7 @@ const baseUrl = config.urls.admin;
 export async function index() {
   const res = await fetch(`${baseUrl}/categories`, {
     method: "GET",
+    cache: "no-store",
     headers: {
       "Content-Type": "application/json",
     },
@@ -21,6 +22,7 @@ export async function index() {
 export async function show(id: number) {
   const res = await fetch(`${baseUrl}/categories/${id}`, {
     method: "GET",
+    cache: "no-store",
     headers: {
       "Content-Type": "application/json",
     },
@@ -39,6 +41,7 @@ export async function create(state: { success: boolean; errors: Record<string, s
 
     const res = await fetch(`${baseUrl}/categories/`, {
       method: "POST",
+      cache: "no-store",
       headers: {
         "Content-Type": "application/json",
       },
@@ -57,10 +60,10 @@ export async function create(state: { success: boolean; errors: Record<string, s
         }
       });
 
-      return { success: false, errors, message: "خطا در ایجاد ویژگی" };
+      return { success: false, errors, message: "خطا در ایجاد دسته بندی" };
     }
 
-    return { success: true, errors: {}, message: "ویژگی با موفقیت ایجاد شد" };
+    return { success: true, errors: {}, message: "دسته بندی با موفقیت ایجاد شد" };
   } catch (error) {
     console.error("Error creating attribute:", error);
     return {
@@ -74,7 +77,7 @@ export async function create(state: { success: boolean; errors: Record<string, s
 export async function update(state: { success: boolean; errors: Record<string, string> }, formData: FormData) {
   const id = formData.get("id");
   if (!id) {
-    return { success: false, errors: {}, message: "خطا: شناسه ویژگی یافت نشد" };
+    return { success: false, errors: {}, message: "خطا: شناسه دسته بندی یافت نشد" };
   }
 
   try {
@@ -84,6 +87,7 @@ export async function update(state: { success: boolean; errors: Record<string, s
 
     const res = await fetch(`${baseUrl}/categories/${id}/`, {
       method: "PUT",
+      cache: "no-store",
       headers: {
         "Content-Type": "application/json",
       },
@@ -102,10 +106,10 @@ export async function update(state: { success: boolean; errors: Record<string, s
         }
       });
 
-      return { success: false, errors, message: "خطا در ویرایش ویژگی" };
+      return { success: false, errors, message: "خطا در ویرایش دسته بندی" };
     }
 
-    return { success: true, errors: {}, message: "ویژگی با موفقیت ویرایش شد" };
+    return { success: true, errors: {}, message: "دسته بندی با موفقیت ویرایش شد" };
   } catch (error) {
     console.error("Error updating attribute:", error);
     return {
@@ -120,6 +124,7 @@ export async function destroy(id: number) {
   try {
     const res = await fetch(`${baseUrl}/categories/${id}/`, {
       method: "DELETE",
+      cache: "no-store",
       headers: {
         "Content-Type": "application/json",
       },
@@ -128,10 +133,10 @@ export async function destroy(id: number) {
     await res.json();
 
     if (!res.ok) {
-      return { success: false, message: "خطا در حذف ویژگی" };
+      return { success: false, message: "خطا در حذف دسته بندی" };
     }
 
-    return { success: true, errors: {}, message: "ویژگی با موفقیت حذف شد" };
+    return { success: true, errors: {}, message: "دسته بندی با موفقیت حذف شد" };
   } catch (error) {
     console.error("Error deleting attribute:", error);
     return {
