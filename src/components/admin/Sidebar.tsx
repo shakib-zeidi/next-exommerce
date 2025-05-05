@@ -1,6 +1,6 @@
 "use client";
 
-import { FolderOpen, Gauge, MessageSquare, NotebookPen, StickyNote, Store, Users } from "lucide-react";
+import { FolderOpen, Gauge, MessageSquare, NotebookPen, Settings, StickyNote, Store, Users } from "lucide-react";
 import Link from "next/link";
 import { RefObject } from "react";
 import DropDwon from "./DropDown";
@@ -70,11 +70,6 @@ export default function Sidebar({
       id: 4,
       name: "برچسب ها",
       link: "/admin-panel/management/posts/tags",
-    },
-    {
-      id: 5,
-      name: "نوع محتوا",
-      link: "/admin-panel/management/posts/content-types",
     },
   ];
 
@@ -146,6 +141,13 @@ export default function Sidebar({
           <Link href="/admin-panel/management/users" className="flex gap-2 items-center">
             <Users size={15} />
             کاربران
+          </Link>
+        </li>
+
+        <li>
+          <Link href="/admin-panel/dashboard/settings" className="flex gap-2 items-center">
+            <Settings size={15} />
+            تنظیمات
           </Link>
         </li>
       </ul>
