@@ -1,8 +1,7 @@
 "use server";
 
-import { UpdateAttributeInterface } from "@/contracts/admin/attributes";
-import { CreateBrandInterface } from "@/contracts/admin/brands";
 import config from "../../../config";
+import { CreateCategoryInterface, UpdateCategoryInterface } from "@/contracts/admin/categories";
 
 const baseUrl = config.urls.admin;
 
@@ -34,9 +33,10 @@ export async function show(id: number) {
 
 export async function create(state: { success: boolean; errors: Record<string, string> }, formData: FormData) {
   try {
-    const formValues: CreateBrandInterface = {
+    const formValues: CreateCategoryInterface = {
       name: formData.get("name"),
       slug: formData.get("slug"),
+      parent: formData.get("parent"),
     };
 
     const res = await fetch(`${baseUrl}/categories/`, {
@@ -65,7 +65,7 @@ export async function create(state: { success: boolean; errors: Record<string, s
 
     return { success: true, errors: {}, message: "دسته بندی با موفقیت ایجاد شد" };
   } catch (error) {
-    console.error("Error creating attribute:", error);
+    console.error("Error creating category:", error);
     return {
       success: false,
       errors: {},
@@ -81,9 +81,15 @@ export async function update(state: { success: boolean; errors: Record<string, s
   }
 
   try {
-    const formValues: UpdateAttributeInterface = {
+    const formValues: UpdateCategoryInterface = {
       name: formData.get("name"),
+      slug: formData.get("slug"),
     };
+
+    const parent = formData.get("parent");
+    if (parent) {
+      formValues.parent = parent;
+    }
 
     const res = await fetch(`${baseUrl}/categories/${id}/`, {
       method: "PUT",
